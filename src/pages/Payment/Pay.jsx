@@ -2,41 +2,46 @@ import "./Pay.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios"
 
 const New = ({ inputs, title }) => {
   const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
   const [Age, setAge] = useState("");
   const [Card_ID, setCard_ID] = useState("");
-  const [Etude, setEtude] = useState("");
-  const [Place, setPlace] = useState("");
+  const [price, setPrice] = useState("");
   const [leveleducation, setleveleducation] = useState("");
-  
-  const addUser = () => {
-    if(Card_ID.length < 7 ){
-       alert("thabbet fil card id")
-  } else  if(FirstName[0] == FirstName[0].toLowerCase()){
-    console.log("nayki")
-    alert("thabbet fil first name")
-  }
-  else{
-    axios.post("http://localhost:3001/api/items/AddUser", {
-      first_name: FirstName,
-      last_name: LastName,
-      birthday: Age,
-      card_id: Card_ID,
-      etude_level: Etude,
-      place: Place,
-      leveleducation:leveleducation
+  const [student, setstudent] = useState([]);
+  const [id_user, setid_user] = useState("")
+  const addpay = () => {
+    axios.post("http://localhost:3001/api/items/Payment", {
+      student: student.first_name,
+      dbt: Age,
+      price: price,
       // image_user:file.name
+      id_User:student.id_User
+      
     }).then((response) => {
       console.log(response);
+    }).catch((err) => {
+      console.log(err);
     })
-    window.location.assign("http://localhost:3000/users")
+
   }
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("std"))
+    if (items) {
+      var s = items[0]
+      // console.log(s)
+      setstudent(s)
+    }
+  }, [])
+  const ff= (id_User)=>{
+    axios.get(`http://localhost:3001/api/items/selectuserpay/${student.id_User}`).then((response)=>{
+      console.log(response)
+    })
   }
+  // console.log(student)
   return (
     <div className="new">
       <Sidebar />
@@ -53,25 +58,18 @@ const New = ({ inputs, title }) => {
             <div className="formInput">
             </div>
             <div id="sign">
-              <p>FirstName</p>
-              <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}></input>
-              <p>LastName</p>
-              <input type="text" name="LastName" onChange={(e) => setLastName(e.target.value)}></input>
+              <p>تلميذ</p>
+              <input type="text" name="firstName" placeholder={student.first_name+student.last_name} onChange={(e) => setFirstName(e.target.value)}></input>
+              <p>id_user</p>
+              <input type="number" placeholder={student.id_User} name="id_user" onChange={(e) => setid_user(e.target.value)}></input>
               <p>Date</p>
               <input type="date" name="Age" onChange={(e) => setAge(e.target.value)}></input>
-              <p>Etude</p>
-              <select onChange={(e) => setEtude(e.target.value)}>
-                <option >TSIG 1</option>
-                <option >TSIG 2</option>
-                <option > AJE 1</option>
-                <option > AJE 2</option>
-                <option > EPPE 1</option>
-                <option > EPPE 2</option>
-                <option > EPPE 1 FE</option>
-                <option > EPPE 2 FE</option>
-              </select>
+              <p>Price</p>
+              <input type="number" name="price" onChange={(e) => setPrice(e.target.value)}></input>
+
             </div>
-            <button onClick={addUser}>Send</button>
+            <button onClick={addpay}>Send</button>
+            <button onClick={ff}>aaaa</button>
 
 
           </div>

@@ -4,19 +4,56 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { useState,useEffect } from "react";
+import axios from "axios";
+
 
 const Widget = ({ type }) => {
   let data;
+  const [users, setUsers] = useState([])
+  const [tlamtha, settlamtha] = useState([])
+  const [total, setTotal] = useState([])
 
+const all = ()=>{
+  axios.get("http://localhost:3001/api/items/selectAll").then((response)=>{
+    settlamtha(response.data)
+
+  },["http://localhost:3001/api/items/selectAll"])
+}
+const pay = ()=>{
+  axios.get("http://localhost:3001/api/items/userpay").then((response)=>{
+    var s = response.data
+    setUsers(s)
+
+},["http://localhost:3001/api/items/userpay"])
+}
+useEffect( ()=>{
+  pay()
+  result()
+})
+
+const result = ()=>{
+  var res= 0
+  var a = []
+  users.map((item)=>{
+  var b = res+= item.price
+  // console.log(b)
+  setTotal(b)
+  }
+)
+return res
+}
+// console.log(total)
   //temporary
-  const amount = 100;
+  const amount = total;
+  const numbertlamtha = tlamtha.length
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
         title: "USERS",
-        isMoney: false,
+        isM: true,
         link: "See all users",
         icon: (
           <PersonOutlinedIcon
@@ -34,15 +71,9 @@ const Widget = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
-        icon: (
-          <ShoppingCartOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
-            }}
-          />
-        ),
+        
+         
+        
       };
       break;
     case "earning":
@@ -61,7 +92,7 @@ const Widget = ({ type }) => {
     case "balance":
       data = {
         title: "BALANCE",
-        isMoney: true,
+        isMoney: false,
         link: "See details",
         icon: (
           <AccountBalanceWalletOutlinedIcon
@@ -84,13 +115,12 @@ const Widget = ({ type }) => {
         <span className="title">{data.title}</span>
         <span className="counter">
           {data.isMoney && "$"} {amount}
-        </span>
+          </span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
         <div className="percentage positive">
           <KeyboardArrowUpIcon />
-          {diff} %
         </div>
         {data.icon}
       </div>

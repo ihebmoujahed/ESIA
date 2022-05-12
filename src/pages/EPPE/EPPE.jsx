@@ -21,8 +21,13 @@ const AJE = ({ inputs, title }) => {
   },["http://localhost:3001/api/items/selectEPPE"])
   })
   const pay = (id)=>{
-    window.location.assign(`http://localhost:3000/Payment/{id}`)
+    window.location.assign(`http://localhost:3000/Payment`)
     console.log(id)
+  }
+  const ff= (id_User)=>{
+    axios.get("http://localhost:3001/api/items/selectuserpay").then((response)=>{
+      console.log(response)
+    })
   }
   const actionColumn = [
     {
@@ -55,25 +60,26 @@ const AJE = ({ inputs, title }) => {
         
         <div>
         <h3>Student</h3>
-        <h3 style={{position:"relative",top:-28,left:222}}>specialization</h3>
-        <h3 style={{position:"relative",top:-58,left:482}}>Card_id</h3>
-        <h3 style={{position:"relative",top:-78,left:682}}>Birthday</h3>
+        <h3 style={{position:"relative",top:-24,left:222}}>specialization</h3>
+        <h3 style={{position:"relative",top:-46,left:482}}>Card_id</h3>
+        <h3 style={{position:"relative",top:-67,left:682}}>Birthday</h3>
         </div>
         {users.map((item)=>{
           return (
             <div className="data">
             <hr></hr>
             <h3>{item.first_name} {item.last_name}</h3>
-            <h3 style={{marginLeft:250,position: "relative",top:-26}}>{item.etude_level}</h3>
-            <h3 style={{marginLeft:480,position: "relative",top:-49}}>{item.card_id}</h3>
-            <h3 style={{marginLeft:680,position: "relative",top:-74}}>{item.birthday}</h3>
-            <button style={{position: "relative",left:900,top:-126, background:"white",borderradius:22}} onClick={(id_User)=>pay(item.id_User)}>Payement</button>
-
+            <h3 style={{marginLeft:250,position: "relative",top:-24}}>{item.etude_level}</h3>
+            <h3 style={{marginLeft:480,position: "relative",top:-46}}>{item.card_id}</h3>
+            <h3 style={{marginLeft:680,position: "relative",top:-70}}>{item.birthday}</h3>
+            <a href="http://localhost:3000/Payment"><button style={{position: "relative",left:900,top:-123, background:"white",borderradius:22}} onClick={(index)=>localStorage.setItem("std",JSON.stringify(users))}>Payement</button></a>
+            <button>get</button>
             </div>
           )
         })}
         
         </div>
+        
 
       </div>
     </div>

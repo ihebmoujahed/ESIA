@@ -5,6 +5,17 @@ var db = require("../database-mysql");
 // var Item = require('../database-mongo/Item.model.js');
 
 // UNCOMMENT IF USING MYSQL WITH CALLBACKS
+const selectid=function(req, res) {
+  var params = req.params.id
+  var sel = "SELECT * FROM Users WHERE id_User=?"
+  db.query(sel,[params], (err, result) => {
+    if(err) {
+      console.log(err)
+    }else{
+      res.send(result)
+    }
+  })
+}
 var selectAll = function (req, res) {
   db.query("SELECT * FROM Users", (err, items, fields) => {
     if (err) {
@@ -44,6 +55,7 @@ var selectEPPE = function (req, res) {
 var AddUser = function (req, res) {
     var insert = "INSERT INTO Users SET ?"
     var params = {
+
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         birthday: req.body.birthday,
@@ -61,6 +73,43 @@ var AddUser = function (req, res) {
         }
     })
 }
+const Payment = function (req, res) {
+  var insert = "INSERT INTO Payment SET ?"
+  var params = {
+    student: req.body.student,
+    dbt: req.body.dbt,
+    price: req.body.price,
+    id_User: req.body.id_User,
+  }
+  db.query(insert, params,(err, result)=>{
+    if(err) {
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+}
+const userpay = function (req, res) {
+  var selectAll = "SELECT * FROM Payment"
+  db.query(selectAll, (err, result) => {
+    if(err) {
+      console.log(err)
+    }else{
+      res.send(result)
+    }
+  })
+}
+const selectuserpay = function (req, res) {
+  var params = req.params.id
+  var sql ="SELECT Payment.price,Payment.dbt, Users.first_name FROM (Payment INNER JOIN Users ON Payment.id_User = Users.id_User) Where Payment.id_User=?"
+  db.query(sql, [params], (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 
 // UNCOMMENT IF USING MONGOOSE WITH PROMISES
 // var selectAll = function (req, res) {
@@ -83,4 +132,4 @@ var AddUser = function (req, res) {
 //   }
 // };
 
-module.exports = { AddUser,selectAll,selectAJE1,selectAJE2,selectEPPE};
+module.exports = { AddUser,selectAll,selectAJE1,selectAJE2,selectEPPE,Payment,userpay,selectuserpay,selectid};

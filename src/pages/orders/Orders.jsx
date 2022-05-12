@@ -15,10 +15,10 @@ const Orders = ({ inputs, title }) => {
     setData(data.filter((item) => item.id !== id));
   };
   useEffect( ()=>{
-    axios.get("http://localhost:3001/api/items/selectAll").then((response)=>{
+    axios.get("http://localhost:3001/api/items/userpay").then((response)=>{
       setUsers(response.data)
 
-  },["http://localhost:3001/api/items/selectAll"])
+  },["http://localhost:3001/api/items/userpay"])
   })
   const actionColumn = [
     {
@@ -51,18 +51,16 @@ const Orders = ({ inputs, title }) => {
         
         <div>
         <h3>Student</h3>
-        <h3 style={{position:"relative",top:-28,left:222}}>specialization</h3>
-        <h3 style={{position:"relative",top:-58,left:482}}>Card_id</h3>
-        <h3 style={{position:"relative",top:-78,left:682}}>Birthday</h3>
+        <h3 style={{position:"relative",top:-28,left:222}}>price</h3>
+        <h3 style={{position:"relative",top:-58,left:482}}>date of payments</h3>
         </div>
         {users.map((item)=>{
           return (
             <div className="data">
             <hr></hr>
-            <h3>{item.first_name} {item.last_name}</h3>
-            <h3 style={{marginLeft:250,position: "relative",top:-26}}>{item.etude_level}</h3>
-            <h3 style={{marginLeft:480,position: "relative",top:-49}}>{item.card_id}</h3>
-            <h3 style={{marginLeft:680,position: "relative",top:-74}}>{item.birthday}</h3>
+            <h3>{item.student}</h3>
+            <h3 style={{marginLeft:220,position: "relative",top:-24}}>{item.price}dt</h3>
+            <h3 style={{marginLeft:480,position: "relative",top:-43}}>{item.dbt}</h3>
             </div>
           )
         })}

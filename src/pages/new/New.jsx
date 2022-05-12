@@ -16,7 +16,7 @@ const New = ({ inputs, title }) => {
   const [leveleducation, setleveleducation] = useState("");
   
   const addUser = () => {
-    if(Card_ID.length < 7 ){
+    if(Card_ID.length < 7 || Card_ID.length > 8) {
        alert("thabbet fil card id")
   } else  if(FirstName[0] == FirstName[0].toLowerCase()){
     console.log("nayki")
