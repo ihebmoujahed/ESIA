@@ -29,7 +29,7 @@ const Sidebar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-           <a href="http://localhost:3000"> <DashboardIcon className="icon" />
+           <a href="http://localhost:3000/Home"> <DashboardIcon className="icon" />
             <span>Dashboard</span></a>
           </li>
           <p className="title">LISTS</p>
