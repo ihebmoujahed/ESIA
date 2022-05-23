@@ -1,4 +1,4 @@
-import "./Pay.scss";
+import "./PayTeach.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -7,20 +7,20 @@ import axios from "axios"
 
 const New = ({ inputs, title }) => {
   const [FirstName, setFirstName] = useState("");
-  const [Age, setAge] = useState([]);
-  const [Card_ID, setCard_ID] = useState("");
+  const [Age, setAge] = useState("");
+  const [id_Teacher, setid_Teacher] = useState("");
   const [price, setPrice] = useState("");
   const [leveleducation, setleveleducation] = useState("");
   const [student, setstudent] = useState([]);
   const [Month, setMonth] = useState("");
   const [userpay, setuserpay] = useState([])
   const addpay = () => {
-    axios.post("http://localhost:3001/api/items/Payment", {
+    axios.post("http://localhost:3001/api/items/PaymentTeacher", {
       student: student.first_name,
       dbt: Age,
-      price: price,
+      price: student.Payment*price,
       // image_user:file.name
-      id_User: student.id_User,
+      id_Teacher: student.id_Teacher,
       month: Month
 
     }).then((response) => {
@@ -28,7 +28,7 @@ const New = ({ inputs, title }) => {
     }).catch((err) => {
       console.log(err);
     })
-
+    
   }
   const datetoday=()=>{
     const d = new Date();
@@ -38,26 +38,28 @@ const New = ({ inputs, title }) => {
   }
 
   const get = () => {
-    const items = JSON.parse(localStorage.getItem("std"))
+    const items = JSON.parse(localStorage.getItem("teach"))
     if (items) {
       var s = items[0]
       // console.log(s)
       setstudent(s)
     }
   }
-  useEffect((id_User) => {
+  useEffect((id_Teacher) => {
 
-    axios.get(`http://localhost:3001/api/items/selectuserpay/${student.id_User}`).then((response) => {
-      console.log(response.data);
+    axios.get(`http://localhost:3001/api/items/selectteacherpay/${student.id_Teacher}`).then((response) => {
+    //   console.log(response.data);
       setuserpay(response.data)
-      // console.log(userpay)
     })
 
     get()
     datetoday()
-  }, [`http://localhost:3001/api/items/selectuserpay/${student.id_User}`])
+  }, [`http://localhost:3001/api/items/selectteacherpay/${student.id_Teacher}`])
 
-  console.log(Month)
+//   console.log(Month)
+// console.log(student)
+
+
   return (
     <div className="new">
       <Sidebar />
@@ -74,7 +76,7 @@ const New = ({ inputs, title }) => {
             <div className="formInput">
             </div>
             <div id="sign">
-              <p>تلميذ</p>
+              <p>الاستاذ(ة)</p>
               <input type="text" name="firstName" placeholder={student.first_name + student.last_name} onChange={(e) => setFirstName(e.target.value)}></input>
               <p>Months</p>
               <select onChange={(e) => setMonth(e.target.value)}>
@@ -94,11 +96,13 @@ const New = ({ inputs, title }) => {
               </select>
               <p>Date</p>
               <p>{Age}</p>
-              <p>Price</p>
+
+              <p>ساعات العمل</p>
               <input type="number" name="price" onChange={(e) => setPrice(e.target.value)}></input>
+              
 
             </div>
-            <a href="http://localhost:3000/Payment"><button onClick={addpay}>Send</button></a>
+            <a href="http://localhost:3000/PaymentTeacher"><button onClick={addpay}>Send</button></a>
 
 
           </div>
@@ -117,7 +121,7 @@ const New = ({ inputs, title }) => {
               <hr></hr>
               <h3>{item.first_name}</h3>
               <h3 style={{ marginLeft: 220, position: "relative", top: -22 }}>{item.price}dt</h3>
-              <h4 style={{ marginLeft: 480, position: "relative", top: -47 }}>{item.dbt}</h4>
+              <h3 style={{ marginLeft: 480, position: "relative", top: -47 }}>{item.dbt}</h3>
               <h3 style={{ marginLeft: 1300, position: "relative", top: -77 }}>{item.month}</h3>
 
             </div>

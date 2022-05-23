@@ -6,20 +6,16 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { useState,useEffect } from "react";
 import axios from "axios";
+import { Sync } from "@mui/icons-material";
 
 
 const Widget = ({ type }) => {
   let data;
   const [users, setUsers] = useState([])
   const [tlamtha, settlamtha] = useState([])
-  const [total, setTotal] = useState([])
+  const [total, setTotal] = useState(0)
 
-const all = ()=>{
-  axios.get("http://localhost:3001/api/items/selectAll").then((response)=>{
-    settlamtha(response.data)
 
-  },["http://localhost:3001/api/items/selectAll"])
-}
 const pay = ()=>{
   axios.get("http://localhost:3001/api/items/userpay").then((response)=>{
     var s = response.data
@@ -27,7 +23,13 @@ const pay = ()=>{
 
 },["http://localhost:3001/api/items/userpay"])
 }
-useEffect( ()=>{
+useEffect(()=> {
+  // axios.get("http://localhost:3001/api/items/selectAll").then((response)=>{
+  //   // console.log(response.data);
+  //   var res = response.data
+  //   settlamtha(res)
+  
+  // },["http://localhost:3001/api/items/selectAll"])
   pay()
   result()
 })
@@ -43,18 +45,19 @@ const result = ()=>{
 )
 return res
 }
-// console.log(total)
+// console.log(tlamtha.length)
   //temporary
   const amount = total;
-  const numbertlamtha = tlamtha.length
+  const numbertlamtha = 0
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
         title: "USERS",
-        isM: true,
         link: "See all users",
+        nember:`${numbertlamtha}`,
+
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -68,10 +71,7 @@ return res
       break;
     case "order":
       data = {
-        title: "ORDERS",
-        isMoney: false,
-        link: "View all orders",
-        
+        title: "ORDERS",        
          
         
       };
@@ -81,6 +81,7 @@ return res
         title: "EARNINGS",
         isMoney: true,
         link: "View net earnings",
+        nember:`${amount}`,
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -114,8 +115,8 @@ return res
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
           </span>
+          <span>{data.nember}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">

@@ -19,7 +19,7 @@ const AJE = ({ inputs, title }) => {
     axios.get("http://localhost:3001/api/items/selectEPPE").then((response) => {
       setUsers(response.data)
 
-    }, ["http://localhost:3001/api/items/selectAJE1"])
+    }, ["http://localhost:3001/api/items/selectEPPE"])
   })
   //   const pasely = (id_User)=>{
   //     axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response)=>{
@@ -79,6 +79,15 @@ const AJE = ({ inputs, title }) => {
                 })
                 }
                 >Payement</button></a>
+                  <a href="http://localhost:3000/users/profiel"><button style={{ position: "relative", left:1000, top: -183, background: "white", borderradius: 22 }} onClick={(id_User) => 
+                axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
+                  console.log(response.data)
+                  var haya = response.data
+                  // console.log(usersinfo)
+                  localStorage.setItem("std",JSON.stringify(haya))
+                })
+                }
+                >Profiel</button></a>
               </div>
             )
           })}

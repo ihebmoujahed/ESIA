@@ -1,10 +1,26 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
+// import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
+import { useState, useEffect } from "react";
+import axios from "axios"
 
 const Single = () => {
+  const [student, setstudent] = useState([]);
+
+
+  const get = () => {
+    const items = JSON.parse(localStorage.getItem("std"))
+    if (items) {
+      var s = items[0]
+      // console.log(s)
+      setstudent(s)
+    }
+  }
+useEffect(() => {
+  get()
+})
   return (
     <div className="single">
       <Sidebar />
@@ -12,39 +28,33 @@ const Single = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Edit</div>
             <h1 className="title">Information</h1>
             <div className="item">
               <img
-                src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                src={student.image_user}
                 alt=""
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{student.first_name + student.last_name}</h1>
                 <div className="detailItem">
-                  <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemKey">birthday:</span>
+                  <span className="itemValue">{student.birthday}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Phone:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Address:</span>
+                  <span className="itemKey">card_id:</span>
                   <span className="itemValue">
-                    Elton St. 234 Garden Yd. NewYork
+                   {student.card_id}
                   </span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Country:</span>
-                  <span className="itemValue">USA</span>
+                  <span className="itemValue">{student.place}</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
           </div>
         </div>
         <div className="bottom">

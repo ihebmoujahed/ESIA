@@ -1,5 +1,4 @@
-import "./AJE.scss";
-import "./AJE.css";
+import "./EPPE2.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -17,10 +16,10 @@ const AJE = ({ inputs, title }) => {
     setData(data.filter((item) => item.id !== id));
   };
   useEffect(() => {
-    axios.get("http://localhost:3001/api/items/selectAJE1").then((response) => {
+    axios.get("http://localhost:3001/api/items/selectEPPE2").then((response) => {
       setUsers(response.data)
 
-    }, ["http://localhost:3001/api/items/selectAJE1"])
+    }, ["http://localhost:3001/api/items/selectEPPE2"])
   })
   //   const pasely = (id_User)=>{
   //     axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response)=>{
@@ -71,7 +70,7 @@ const AJE = ({ inputs, title }) => {
                 <h3 style={{ marginLeft: 250, position: "relative", top: -24 }}>{item.etude_level}</h3>
                 <h3 style={{ marginLeft: 480, position: "relative", top: -46 }}>{item.card_id}</h3>
                 <h3 style={{ marginLeft: 680, position: "relative", top: -70 }}>{item.birthday}</h3>
-                <a href="http://localhost:3000/Payment"><button class="button-6"  style={{ position: "relative", left: 900, top: -123, background: "white", borderradius: 22 }} onClick={(id_User) => 
+                <a href="http://localhost:3000/Payment"><button style={{ position: "relative", left: 900, top: -123, background: "white", borderradius: 22 }} onClick={(id_User) => 
                 axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
                   console.log(response.data)
                   var haya = response.data
@@ -80,7 +79,7 @@ const AJE = ({ inputs, title }) => {
                 })
                 }
                 >Payement</button></a>
-                <a href="http://localhost:3000/users/profiel"><button style={{ position: "relative", left:1000, top: -183, background: "white", borderradius: 22 }} onClick={(id_User) => 
+                  <a href="http://localhost:3000/users/profiel"><button style={{ position: "relative", left:1000, top: -183, background: "white", borderradius: 22 }} onClick={(id_User) => 
                 axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
                   console.log(response.data)
                   var haya = response.data

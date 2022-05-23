@@ -1,21 +1,19 @@
-import "./new.scss";
+import "./NewTeach.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import axios from "axios"
 
-const New = ({ inputs, title }) => {
-  const [image, setFile] = useState("");
-  const [taswira, settaswira] = useState("");
-
+const NewTeach = ({ inputs, title }) => {
+  const [file, setFile] = useState("");
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Age, setAge] = useState("");
   const [Card_ID, setCard_ID] = useState("");
   const [Etude, setEtude] = useState("");
   const [Place, setPlace] = useState("");
-  const [leveleducation, setleveleducation] = useState("");
+  const [Payment, setPayment] = useState("");
   
   const addUser = () => {
     if(Card_ID.length < 7 || Card_ID.length > 8) {
@@ -25,35 +23,21 @@ const New = ({ inputs, title }) => {
     alert("thabbet fil first name")
   }
   else{
-    axios.post("http://localhost:3001/api/items/AddUser", {
+    axios.post("http://localhost:3001/api/items/AddTeacher", {
       first_name: FirstName,
       last_name: LastName,
       birthday: Age,
       card_id: Card_ID,
-      etude_level: Etude,
+      Etude: Etude,
       place: Place,
-      leveleducation:leveleducation,
-      image_user:taswira
+      Payment:Payment,
+      // image_user:file.name
     }).then((response) => {
       console.log(response);
     })
-    window.location.assign("http://localhost:3000/users")
+    window.location.assign("http://localhost:3000/Teachers")
   }
   }
-  const uploadimages = (files)=>{
-    const formData = new FormData()
-    formData.append("file",image)
-    formData.append("upload_preset", "suwrrek3")
-
-    axios.post("https://api.cloudinary.com/v1_1/esia/image/upload",formData).then((response)=>{
-      console.log(response.data.secure_url)
-      settaswira(response.data.secure_url)
-    })
-  }
-  useEffect(() => {
-    uploadimages()
-  })
-  console.log(taswira)
   return (
     <div className="new">
       <Sidebar />
@@ -66,8 +50,8 @@ const New = ({ inputs, title }) => {
           <div className="left">
             <img
               src={
-                image
-                  ? URL.createObjectURL(image)
+                file
+                  ? URL.createObjectURL(file)
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               alt=""
@@ -94,22 +78,13 @@ const New = ({ inputs, title }) => {
               <input type="date" name="Age" onChange={(e) => setAge(e.target.value)}></input>
               <p>Card_ID</p>
               <input type="Number" name="Card_ID" onChange={(e) => setCard_ID(e.target.value)}></input>
-              <p>Etude</p>
-              <select onChange={(e) => setEtude(e.target.value)}>
-                <option >Select ClassName</option>
-                <option >TSIG 1</option>
-                <option >TSIG 2</option>
-                <option > AJE 1</option>
-                <option > AJE 2</option>
-                <option > EPPE 1</option>
-                <option > EPPE 2</option>
-                <option > EPPE 1 FE</option>
-                <option > EPPE 2 FE</option>
-              </select>
+              <p>اختصاص</p>
+              <input type="text" name="Etude" onChange={(e) => setEtude(e.target.value)}></input>
+              <p>ثمن الساعة</p>
+              <input type="Number" name="Payment" onChange={(e) => setPayment(e.target.value)}></input>
               <p>Place</p>
               <input type="text" name="Place" onChange={(e) => setPlace(e.target.value)}></input>
-              <p>level education</p>
-              <input type="text" name="Place" onChange={(e) => setleveleducation(e.target.value)}></input>
+              
 
             </div>
             <button onClick={addUser}>Send</button>
@@ -124,4 +99,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default NewTeach;

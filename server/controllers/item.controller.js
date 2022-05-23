@@ -16,8 +16,28 @@ const selectid=function(req, res) {
     }
   })
 }
+const selectidTeacher=function(req, res) {
+  var params = req.params.id
+  var sel = "SELECT * FROM Teacher WHERE id_Teacher=?"
+  db.query(sel,[params], (err, result) => {
+    if(err) {
+      console.log(err)
+    }else{
+      res.send(result)
+    }
+  })
+}
 var selectAll = function (req, res) {
   db.query("SELECT * FROM Users", (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+var selectAllTeacher = function (req, res) {
+  db.query("SELECT * FROM Teacher", (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -52,6 +72,33 @@ var selectEPPE = function (req, res) {
     }
   });
 };
+var selectEPPE2 = function (req, res) {
+  db.query("SELECT * FROM Users where etude_level ='EPPE 2' ", (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+var selectTSIG1 = function (req, res) {
+  db.query("SELECT * FROM Users where etude_level ='TSIG 1' ", (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+var selectTSIG2 = function (req, res) {
+  db.query("SELECT * FROM Users where etude_level ='TSIG 2' ", (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 var AddUser = function (req, res) {
     var insert = "INSERT INTO Users SET ?"
     var params = {
@@ -63,7 +110,7 @@ var AddUser = function (req, res) {
         etude_level: req.body.etude_level,
         place: req.body.place,
         leveleducation:req.body.leveleducation,
-        // image_user: req.body.image_user
+        image_user: req.body.image_user
     }
     db.query(insert, params,(err,result) => {
         if(err) {
@@ -80,6 +127,7 @@ const Payment = function (req, res) {
     dbt: req.body.dbt,
     price: req.body.price,
     id_User: req.body.id_User,
+    month: req.body.month,
   }
   db.query(insert, params,(err, result)=>{
     if(err) {
@@ -89,6 +137,24 @@ const Payment = function (req, res) {
     }
   })
 }
+const PaymentTeacher = function (req, res) {
+  var insert = "INSERT INTO PaymentTeacher SET ?"
+  var params = {
+    student: req.body.student,
+    dbt: req.body.dbt,
+    price: req.body.price,
+    id_Teacher: req.body.id_Teacher,
+    month: req.body.month,
+  }
+  db.query(insert, params,(err, result)=>{
+    if(err) {
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+}
+
 const userpay = function (req, res) {
   var selectAll = "SELECT * FROM Payment"
   db.query(selectAll, (err, result) => {
@@ -101,7 +167,7 @@ const userpay = function (req, res) {
 }
 const selectuserpay = function (req, res) {
   var params = req.params.id
-  var sql ="SELECT Payment.price,Payment.dbt, Users.first_name FROM (Payment INNER JOIN Users ON Payment.id_User = Users.id_User) Where Payment.id_User=?"
+  var sql ="SELECT Payment.price,Payment.dbt,Payment.month, Users.first_name FROM (Payment INNER JOIN Users ON Payment.id_User = Users.id_User) Where Payment.id_User=?"
   db.query(sql, [params], (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
@@ -110,6 +176,40 @@ const selectuserpay = function (req, res) {
     }
   });
 };
+const selectteacherpay = function (req, res) {
+  var params = req.params.id
+  var sql ="SELECT PaymentTeacher.price,PaymentTeacher.dbt,PaymentTeacher.month, Teacher.first_name FROM (PaymentTeacher INNER JOIN Teacher ON PaymentTeacher.id_Teacher = Teacher.id_Teacher) Where PaymentTeacher.id_Teacher=?"
+  db.query(sql, [params], (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+
+var AddTeacher = function (req, res) {
+  var insert = "INSERT INTO Teacher SET ?"
+  var params = {
+
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      birthday: req.body.birthday,
+      card_id: req.body.card_id,
+      Etude: req.body.Etude,
+      place: req.body.place,
+      Payment:req.body.Payment,
+      image_user: req.body.image_user
+  }
+  db.query(insert, params,(err,result) => {
+      if(err) {
+          console.log(err)
+      }else{
+          res.send(result)
+      }
+  })
+}
+
 
 // UNCOMMENT IF USING MONGOOSE WITH PROMISES
 // var selectAll = function (req, res) {
@@ -132,4 +232,4 @@ const selectuserpay = function (req, res) {
 //   }
 // };
 
-module.exports = { AddUser,selectAll,selectAJE1,selectAJE2,selectEPPE,Payment,userpay,selectuserpay,selectid};
+module.exports = { AddUser,selectAll,selectAJE1,selectAJE2,selectEPPE,Payment,userpay,selectuserpay,selectid,AddTeacher,selectAllTeacher,selectidTeacher,PaymentTeacher,selectteacherpay,selectEPPE2,selectTSIG1,selectTSIG2};

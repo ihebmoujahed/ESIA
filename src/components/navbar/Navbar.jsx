@@ -15,10 +15,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="wrapper">
-        <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon />
-        </div>
+        
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
@@ -46,7 +43,7 @@ const Navbar = () => {
           </div>
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="https://scontent.ftun15-1.fna.fbcdn.net/v/t1.6435-9/78284620_10213730622854765_916203926821273600_n.jpg?_nc_cat=111&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=XEKgGRF_Y78AX8sgw_b&_nc_ht=scontent.ftun15-1.fna&oh=00_AT8Y1JAWtNATW-5L5NXW9cnJWFc5gLE8wwbdW3HJE9zySA&oe=62A68623"
               alt=""
               className="avatar"
             />

@@ -11,6 +11,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import SchoolIcon from '@mui/icons-material/School';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
@@ -47,31 +48,60 @@ const Sidebar = () => {
           </li>
           </Link>
 
-          <p className="title">USEFUL</p>
+          <p className="title">الكلاسات</p>
           <Link to="/AJE" style={{ textDecoration: "none" }}>
           <li>
-            <CreditCardIcon className="icon" />
-            <span>AJE قسم</span>
+            <SchoolIcon className="icon" />
+            <span>AJE1 قسم</span>
           </li>
+          
+          <Link to="/AJE2" style={{ textDecoration: "none" }}>
+          <li>
+            <SchoolIcon className="icon" />
+            <span>AJE2 قسم</span>
+          </li>
+          </Link>
           </Link>
           <Link to="/EPPE" style={{ textDecoration: "none" }}>
           <li>
-            <CreditCardIcon className="icon" />
+            <SchoolIcon className="icon" />
             <span>EPPE قسم</span>
+          </li>
+          </Link>
+          <Link to="/EPPE2" style={{ textDecoration: "none" }}>
+          <li>
+            <SchoolIcon className="icon" />
+            <span>EPPE2 قسم</span>
+          </li>
+          </Link>
+          <Link to="/TSIG1" style={{ textDecoration: "none" }}>
+          <li>
+            <SchoolIcon className="icon" />
+            <span>TSIG1 قسم</span>
+          </li>
+          </Link>
+          <Link to="/TSIG2" style={{ textDecoration: "none" }}>
+          <li>
+            <SchoolIcon className="icon" />
+            <span>TSIG2 قسم</span>
           </li>
           </Link>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
-          <p className="title">SERVICE</p>
+          <p className="title">الاساتذ</p>
+          <Link to="/Teachers" style={{ textDecoration: "none" }}>
+
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
+            <span>كل الاساتذ</span>
           </li>
+          </Link>
+
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
+            <span>خلاص الاساتذ</span>
           </li>
        
           <p className="title">USER</p>
