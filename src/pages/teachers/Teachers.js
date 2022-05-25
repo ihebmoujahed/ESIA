@@ -66,7 +66,7 @@ const Datatable = () => {
                                 <h3 style={{ marginLeft: 250, position: "relative", top: -26 }}>{item.Etude}</h3>
                                 <h3 style={{ marginLeft: 480, position: "relative", top: -49 }}>{item.card_id}</h3>
                                 <h3 style={{ marginLeft: 680, position: "relative", top: -74 }}>{item.birthday}</h3>
-                                <a href="http://localhost:3000/PaymentTeacher"><button style={{ position: "relative", left: 900, top: -123, background: "white", borderradius: 22 }} onClick={(id_User) =>
+                                <a href="http://localhost:3000/PaymentTeacher"><button class="button-85" onClick={(id_User) =>
                                     axios.get(`http://localhost:3001/api/items/selectidTeacher/${item.id_Teacher}`).then((response) => {
                                         console.log(response.data)
                                         var haya = response.data
@@ -75,6 +75,15 @@ const Datatable = () => {
                                     })
                                 }
                                 >Payement</button></a>
+                                <a href="http://localhost:3000/users/profiel"><button class="button-86" onClick={(id_User) =>
+                                    axios.get(`http://localhost:3001/api/items/selectidTeacher/${item.id_Teacher}`).then((response) => {
+                                        console.log(response.data)
+                                        var haya = response.data
+                                        // console.log(usersinfo)
+                                        localStorage.setItem("std", JSON.stringify(haya))
+                                    })
+                                }
+                                >Profiel</button></a>
                             </div>
                         )
                     })}

@@ -9,42 +9,10 @@ const Featured = () => {
   return (
     <div className="featured">
       <div className="top">
-        <h1 className="title">Total Revenue</h1>
+        <img src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/70734131_10213174232585356_1106803842294480896_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=gyqjA4YgF2oAX-MMf4-&_nc_ht=scontent.ftun16-1.fna&oh=00_AT8HwhmvYiO7e1d7zpgHu73QqRZ21yZmIjfpvi8s0b-tgQ&oe=62B1BB7C" alt="Stickman" width="1524" height="1539" />
         <MoreVertIcon fontSize="small" />
       </div>
-      <div className="bottom">
-        <div className="featuredChart">
-          <CircularProgressbar value={70} text={"70%"} strokeWidth={5} />
-        </div>
-        <p className="title">Total sales made today</p>
-        <p className="amount">$760</p>
-        <p className="desc">
-          Previous transactions processing. Last payments may not be included.
-        </p>
-        <div className="summary">
-          <div className="item">
-            <div className="itemTitle">Target</div>
-            <div className="itemResult negative">
-              <KeyboardArrowDownIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
-            </div>
-          </div>
-          <div className="item">
-            <div className="itemTitle">Last Week</div>
-            <div className="itemResult positive">
-              <KeyboardArrowUpOutlinedIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
-            </div>
-          </div>
-          <div className="item">
-            <div className="itemTitle">Last Month</div>
-            <div className="itemResult positive">
-              <KeyboardArrowUpOutlinedIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

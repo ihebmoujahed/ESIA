@@ -1,4 +1,5 @@
 import "./Pay.scss";
+import "./Pay.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -73,10 +74,10 @@ const New = ({ inputs, title }) => {
           <div className="right">
             <div className="formInput">
             </div>
-            <div id="sign">
-              <p>تلميذ</p>
-              <input type="text" name="firstName" placeholder={student.first_name + student.last_name} onChange={(e) => setFirstName(e.target.value)}></input>
-              <p>Months</p>
+            <div className="sign">
+              <h4 className="label">تلميذ</h4>
+              <input type="text" name="firstName" id="name" placeholder={student.first_name + student.last_name} onChange={(e) => setFirstName(e.target.value)}></input>
+              <h4 className="label">Months</h4>
               <select onChange={(e) => setMonth(e.target.value)}>
                 <option>Select Month</option>
                 <option>جانفي</option>
@@ -92,13 +93,13 @@ const New = ({ inputs, title }) => {
                 <option>نوفمبر</option>
                 <option>ديسمبر</option>
               </select>
-              <p>Date</p>
+              <h4>Date</h4>
               <p>{Age}</p>
-              <p>Price</p>
-              <input type="number" name="price" onChange={(e) => setPrice(e.target.value)}></input>
+              <h4>Price</h4>
+              <input type="number" id="name" name="price" onChange={(e) => setPrice(e.target.value)}></input>
 
             </div>
-            <a href="http://localhost:3000/Payment"><button onClick={addpay}>Send</button></a>
+            <a href="http://localhost:3000/Payment"><button class="btn" onClick={addpay}>Send</button></a>
 
 
           </div>

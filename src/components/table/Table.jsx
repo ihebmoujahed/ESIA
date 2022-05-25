@@ -6,8 +6,44 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios"
+import { useState, useEffect } from "react";
 
 const List = () => {
+
+  const [Age, setAge] = useState([]);
+  const [student, setstudent] = useState([]);
+  const [userpay, setuserpay] = useState([])
+
+  const [Month, setMonth] = useState("");
+  const datetoday=()=>{
+    const d = new Date();
+    console.log(d)
+    const t =d.toString()
+    setAge(t)
+  }
+
+  const get = () => {
+    const items = JSON.parse(localStorage.getItem("std"))
+    if (items) {
+      var s = items[0]
+      // console.log(s)
+      setstudent(s)
+    }
+  }
+  useEffect((id_User) => {
+
+    axios.get(`http://localhost:3001/api/items/selectuserpay/${student.id_User}`).then((response) => {
+      console.log(response.data);
+      setuserpay(response.data)
+      // console.log(userpay)
+    })
+
+    get()
+    datetoday()
+  }, [`http://localhost:3001/api/items/selectuserpay/${student.id_User}`])
+
+
   const rows = [
     {
       id: 1143155,
@@ -70,23 +106,20 @@ const List = () => {
             <TableCell className="tableCell">Customer</TableCell>
             <TableCell className="tableCell">Date</TableCell>
             <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
-            <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {userpay.map((row) => (
             <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+              <TableCell className="tableCell">1</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
+                  {row.month}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
+              <TableCell className="tableCell">{row.first_name}</TableCell>
+              <TableCell className="tableCell">{row.dbt}</TableCell>
+              <TableCell className="tableCell">{row.price}</TableCell>
               <TableCell className="tableCell">{row.method}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>

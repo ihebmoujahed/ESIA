@@ -6,7 +6,10 @@ import { useState } from "react";
 import axios from "axios"
 
 const NewTeach = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
+  const [image, setFile] = useState("");
+  const [taswira, settaswira] = useState("");
+
+
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Age, setAge] = useState("");
@@ -31,13 +34,25 @@ const NewTeach = ({ inputs, title }) => {
       Etude: Etude,
       place: Place,
       Payment:Payment,
-      // image_user:file.name
+      image_user:taswira
     }).then((response) => {
       console.log(response);
     })
     window.location.assign("http://localhost:3000/Teachers")
   }
   }
+
+  const uploadimages = (files)=>{
+    const formData = new FormData()
+    formData.append("file",image)
+    formData.append("upload_preset", "suwrrek3")
+
+    axios.post("https://api.cloudinary.com/v1_1/esia/image/upload",formData).then((response)=>{
+      console.log(response.data.secure_url)
+      settaswira(response.data.secure_url)
+    })
+  }
+
   return (
     <div className="new">
       <Sidebar />
@@ -50,8 +65,8 @@ const NewTeach = ({ inputs, title }) => {
           <div className="left">
             <img
               src={
-                file
-                  ? URL.createObjectURL(file)
+                image
+                  ? URL.createObjectURL(image)
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               alt=""

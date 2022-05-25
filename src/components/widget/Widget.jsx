@@ -13,9 +13,26 @@ const Widget = ({ type }) => {
   let data;
   const [users, setUsers] = useState([])
   const [tlamtha, settlamtha] = useState([])
+  const [profet, setprofet] = useState([])
   const [total, setTotal] = useState(0)
 
 
+var tlamdha=()=>{
+   axios.get("http://localhost:3001/api/items/selectAll").then((response)=>{
+    // console.log(response.data);
+    var res = response.data
+    settlamtha(res)
+  
+  },["http://localhost:3001/api/items/selectAll"])
+}
+
+var teachers=()=>{
+  axios.get("http://localhost:3001/api/items/selectAllTeacher").then((response) => {
+    setprofet(response.data)
+
+        }, ["http://localhost:3001/api/items/selectAllTeacher"])
+}
+// console.log(profet)
 const pay = ()=>{
   axios.get("http://localhost:3001/api/items/userpay").then((response)=>{
     var s = response.data
@@ -31,7 +48,12 @@ useEffect(()=> {
   
   // },["http://localhost:3001/api/items/selectAll"])
   pay()
+  // teachers()
   result()
+})
+useEffect(()=>{
+  teachers()
+  tlamdha()
 })
 
 const result = ()=>{
@@ -48,13 +70,14 @@ return res
 // console.log(tlamtha.length)
   //temporary
   const amount = total;
-  const numbertlamtha = 0
+  const numbertlamtha = tlamtha.length
+  const profetnumber = profet.length
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
-        title: "USERS",
+        title: "التلامذ",
         link: "See all users",
         nember:`${numbertlamtha}`,
 
@@ -71,7 +94,9 @@ return res
       break;
     case "order":
       data = {
-        title: "ORDERS",        
+        title: "الاساتذ",
+        link: "See all users",
+        nember:`${profetnumber}`,
          
         
       };
@@ -125,6 +150,7 @@ return res
         </div>
         {data.icon}
       </div>
+
     </div>
   );
 };

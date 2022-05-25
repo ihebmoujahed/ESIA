@@ -1,10 +1,18 @@
 import "./TSIG1.scss";
+import "./TSIG1.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import axios from "axios";
 
 const AJE = ({ inputs, title }) => {
@@ -54,45 +62,55 @@ const AJE = ({ inputs, title }) => {
       <Sidebar />
       <div className="newContainer">
         <Navbar />
-        <div className="datatable">
+        <TableContainer component={Paper} className="table">
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+              <TableCell className="tableCell"><h2>Student</h2></TableCell>
+              <TableCell className="tableCell"><h2>specialization</h2></TableCell>
+              <TableCell className="tableCell"><h2>Card_ID</h2></TableCell>
+              <TableCell className="tableCell"><h2>Date</h2></TableCell>
+              <TableCell className="tableCell"><h2>payment</h2></TableCell>
+              <TableCell className="tableCell"><h2>Profiel</h2></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell className="tableCell">{item.first_name}{item.last_name}</TableCell>
+                  <TableCell className="tableCell">
+                    <div className="cellWrapper">
+                      {item.etude_level}
+                    </div>
+                  </TableCell>
+                  <TableCell className="tableCell">{item.card_id}</TableCell>
+                  <TableCell className="tableCell">{item.birthday}</TableCell>
+                  <TableCell className="tableCell"><a href="http://localhost:3000/Payment"><button class="button button2" onClick={(id_User) => 
+                  axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
+                    console.log(response.data)
+                    var haya = response.data
+                    // console.log(usersinfo)
+                    localStorage.setItem("std",JSON.stringify(haya))
+                  })
+                  }
+                  >Payement</button></a></TableCell>
+                  <TableCell className="tableCell"><a href="http://localhost:3000/users/profiel"><button class="button button2" onClick={(id_User) => 
+                  axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
+                    console.log(response.data)
+                    var haya = response.data
+                    // console.log(usersinfo)
+                    localStorage.setItem("std",JSON.stringify(haya))
+                  })
+                  }
+                  >Profiel</button></a></TableCell>
+                  <TableCell className="tableCell">
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-          <div>
-            <h3>Student</h3>
-            <h3 style={{ position: "relative", top: -24, left: 222 }}>specialization</h3>
-            <h3 style={{ position: "relative", top: -46, left: 482 }}>Card_id</h3>
-            <h3 style={{ position: "relative", top: -67, left: 682 }}>Birthday</h3>
-          </div>
-          {users.map((item) => {
-            return (
-              <div className="data">
-                <hr></hr>
-                <h3>{item.first_name} {item.last_name}</h3>
-                <h3 style={{ marginLeft: 250, position: "relative", top: -24 }}>{item.etude_level}</h3>
-                <h3 style={{ marginLeft: 480, position: "relative", top: -46 }}>{item.card_id}</h3>
-                <h3 style={{ marginLeft: 680, position: "relative", top: -70 }}>{item.birthday}</h3>
-                <a href="http://localhost:3000/Payment"><button style={{ position: "relative", left: 900, top: -123, background: "white", borderradius: 22 }} onClick={(id_User) => 
-                axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
-                  console.log(response.data)
-                  var haya = response.data
-                  // console.log(usersinfo)
-                  localStorage.setItem("std",JSON.stringify(haya))
-                })
-                }
-                >Payement</button></a>
-                <a href="http://localhost:3000/users/profiel"><button style={{ position: "relative", left:1000, top: -183, background: "white", borderradius: 22 }} onClick={(id_User) => 
-                axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
-                  console.log(response.data)
-                  var haya = response.data
-                  // console.log(usersinfo)
-                  localStorage.setItem("std",JSON.stringify(haya))
-                })
-                }
-                >Profiel</button></a>
-              </div>
-            )
-          })}
-
-        </div>
 
 
       </div>
