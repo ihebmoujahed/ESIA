@@ -101,11 +101,11 @@ const List = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
+            <TableCell className="tableCell">ID</TableCell>
+            <TableCell className="tableCell">الشهر</TableCell>
+            <TableCell className="tableCell">الاسم</TableCell>
+            <TableCell className="tableCell">تاريخ الدفع</TableCell>
+            <TableCell className="tableCell">الثمن</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -117,7 +117,7 @@ const List = () => {
                   {row.month}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.first_name}</TableCell>
+              <TableCell className="tableCell">{row.first_name} {row.last_name}</TableCell>
               <TableCell className="tableCell">{row.dbt}</TableCell>
               <TableCell className="tableCell">{row.price}</TableCell>
               <TableCell className="tableCell">{row.method}</TableCell>

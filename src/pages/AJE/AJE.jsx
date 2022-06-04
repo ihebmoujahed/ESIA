@@ -67,26 +67,26 @@ const AJE = ({ inputs, title }) => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className="tableCell"><h2>Student</h2></TableCell>
-                <TableCell className="tableCell"><h2>specialization</h2></TableCell>
-                <TableCell className="tableCell"><h2>Card_ID</h2></TableCell>
-                <TableCell className="tableCell"><h2>Date</h2></TableCell>
-                <TableCell className="tableCell"><h2>payment</h2></TableCell>
-                <TableCell className="tableCell"><h2>Profiel</h2></TableCell>
+                <TableCell className="tableCell"><h2>الأسم و اللقب</h2></TableCell>
+                <TableCell className="tableCell"><h2>الأختصاص</h2></TableCell>
+                <TableCell className="tableCell"><h2>بطاقتة التعريف</h2></TableCell>
+                <TableCell className="tableCell"><h2>تاريخ الولادة</h2></TableCell>
+                <TableCell className="tableCell"><h2>الدفع</h2></TableCell>
+                <TableCell className="tableCell"><h2>معلومات التلميذ</h2></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {users.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell className="tableCell">{item.first_name}{item.last_name}</TableCell>
+                  <TableCell className="tableCell" class="tt">{item.first_name} {item.last_name}</TableCell>
                   <TableCell className="tableCell">
-                    <div className="cellWrapper">
+                    <div className="cellWrapper" class="tt">
                       {item.etude_level}
                     </div>
                   </TableCell>
-                  <TableCell className="tableCell">{item.card_id}</TableCell>
-                  <TableCell className="tableCell">{item.birthday}</TableCell>
-                  <TableCell className="tableCell"><a href="http://localhost:3000/Payment"><button class="button button2" onClick={(id_User) => 
+                  <TableCell className="tableCell" class="tt">{item.card_id}</TableCell>
+                  <TableCell className="tableCell" class="tt">{item.birthday}</TableCell>
+                  <TableCell className="tableCell" ><a href="http://localhost:3000/Payment"><button class="button button2" onClick={(id_User) => 
                   axios.get(`http://localhost:3001/api/items/selectid/${item.id_User}`).then((response) => {
                     console.log(response.data)
                     var haya = response.data

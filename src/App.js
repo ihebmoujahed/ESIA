@@ -10,12 +10,15 @@ import EPPE from "./pages/EPPE/EPPE";
 import EPPE2 from "./pages/EPPE2/EPPE2";
 import TSIG1 from "./pages/TSIG1/TSIG1";
 import TSIG2 from "./pages/TSIG2/TSIG2";
+import TeacherM from "./pages/TeacherM/TeacherM";
+import NewTeachM from "./pages/NewTeachM/NewTeachM";
 
 
 import Pay from "./pages/Payment/Pay"
 import Teachers from "./pages/teachers/Teachers"
 import NewTeach from "./pages/NewTeach/NewTeach"
 import PayTeach from "./pages/PaymentTeacher/PayTeach"
+import PayTeachM from "./pages/PaymentTeacherM/PayTeachM"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
@@ -75,12 +78,21 @@ function App() {
           <Route path="PaymentTeacher">
           <Route index element={<PayTeach />} />
           </Route>
+          <Route path="PaymentTeacherM">
+          <Route index element={<PayTeachM />} />
+          </Route>
 
           <Route path="Teachers">
           <Route index element={<Teachers />} />
           </Route>
+          <Route path="TeachersM">
+          <Route index element={<TeacherM />} />
+          </Route>
           <Route path="AddTeach">
           <Route index element={<NewTeach />} />
+          </Route>
+          <Route path="AddTeachM">
+          <Route index element={<NewTeachM />} />
           </Route>
           
           

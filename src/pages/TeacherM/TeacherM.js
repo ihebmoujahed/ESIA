@@ -1,4 +1,4 @@
-import "./teachers.scss";
+import "./TeacherM.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
@@ -15,10 +15,10 @@ const Datatable = () => {
         setData(data.filter((item) => item.id !== id));
     };
     useEffect(() => {
-        axios.get("http://localhost:3001/api/items/selectAllTeacher").then((response) => {
+        axios.get("http://localhost:3001/api/items/selectAllTeacherM").then((response) => {
             setUsers(response.data)
 
-        }, ["http://localhost:3001/api/items/selectAllTeacher"])
+        }, ["http://localhost:3001/api/items/selectAllTeacherM"])
     })
     const actionColumn = [
         {
@@ -50,13 +50,13 @@ const Datatable = () => {
                 <div className="datatable">
                     <div className="datatableTitle">
                         Add New Teacher
-                        <a href="http://localhost:3000/AddTeach"><button className="link">Add New</button></a>
+                        <a href="http://localhost:3000/AddTeachM"><button className="link">Add New</button></a>
                     </div>
                     <div>
-                    <h3>الأسم و اللقب</h3>
-                    <h3 style={{ position: "relative", top: -28, left: 222 }}>الأختصاص</h3>
-                    <h3 style={{ position: "relative", top: -58, left: 482 }}>بطاقتة التعريف</h3>
-                    <h3 style={{ position: "relative", top: -80, left: 682 }}>تاريخ الولادة</h3>
+                        <h3>الأسم و اللقب</h3>
+                        <h3 style={{ position: "relative", top: -28, left: 222 }}>الأختصاص</h3>
+                        <h3 style={{ position: "relative", top: -58, left: 482 }}>بطاقتة التعريف</h3>
+                        <h3 style={{ position: "relative", top: -80, left: 682 }}>تاريخ الولادة</h3>
                     </div>
                     {users.map((item) => {
                         return (
@@ -66,8 +66,8 @@ const Datatable = () => {
                                 <h3 style={{ marginLeft: 250, position: "relative", top: -26 }}>{item.Etude}</h3>
                                 <h3 style={{ marginLeft: 480, position: "relative", top: -49 }}>{item.card_id}</h3>
                                 <h3 style={{ marginLeft: 680, position: "relative", top: -74 }}>{item.birthday}</h3>
-                                <a href="http://localhost:3000/PaymentTeacher"><button class="button-85" onClick={(id_User) =>
-                                    axios.get(`http://localhost:3001/api/items/selectidTeacher/${item.id_Teacher}`).then((response) => {
+                                <a href="http://localhost:3000/PaymentTeacherM"><button class="button-85" onClick={(id_User) =>
+                                    axios.get(`http://localhost:3001/api/items/selectidTeacherM/${item.id_TeacherM}`).then((response) => {
                                         console.log(response.data)
                                         var haya = response.data
                                         // console.log(usersinfo)
@@ -76,7 +76,7 @@ const Datatable = () => {
                                 }
                                 >Payement</button></a>
                                 <a href="http://localhost:3000/users/profiel"><button class="button-86" onClick={(id_User) =>
-                                    axios.get(`http://localhost:3001/api/items/selectidTeacher/${item.id_Teacher}`).then((response) => {
+                                    axios.get(`http://localhost:3001/api/items/selectidTeacherM/${item.id_TeacherM}`).then((response) => {
                                         console.log(response.data)
                                         var haya = response.data
                                         // console.log(usersinfo)

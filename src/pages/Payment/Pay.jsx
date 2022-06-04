@@ -94,7 +94,7 @@ const New = ({ inputs, title }) => {
                 <option>ديسمبر</option>
               </select>
               <h4>Date</h4>
-              <p>{Age}</p>
+              <input type="date" name="price" onChange={(e) => setAge(e.target.value)}></input>
               <h4>Price</h4>
               <input type="number" id="name" name="price" onChange={(e) => setPrice(e.target.value)}></input>
 

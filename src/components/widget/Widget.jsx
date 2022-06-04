@@ -103,7 +103,7 @@ return res
       break;
     case "earning":
       data = {
-        title: "EARNINGS",
+        title: "المداخيل",
         isMoney: true,
         link: "View net earnings",
         nember:`${amount}`,

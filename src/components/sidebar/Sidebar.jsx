@@ -30,21 +30,21 @@ const Sidebar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-           <a href="http://localhost:3000/Home"> <DashboardIcon className="icon" />
-            <span>Dashboard</span></a>
+           <a href="http://localhost:3000/Home">
+            <h3 >Dashboard</h3></a>
           </li>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>كل التاميذ</span>
+              <h2>كل التاميذ</h2>
             </li>
           </Link>
           
           <Link to="/orders" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="icon" />
-            <span>Orders</span>
+            <h2>Orders</h2>
           </li>
           </Link>
 
@@ -52,57 +52,57 @@ const Sidebar = () => {
           <Link to="/AJE" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>AJE1 قسم</span>
+            <h2>AJE1 قسم</h2>
           </li>
           
           <Link to="/AJE2" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>AJE2 قسم</span>
+            <h2>AJE2 قسم</h2>
           </li>
           </Link>
           </Link>
           <Link to="/EPPE" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>EPPE قسم</span>
+            <h2>EPPE قسم</h2>
           </li>
           </Link>
           <Link to="/EPPE2" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>EPPE2 قسم</span>
+            <h2>EPPE2 قسم</h2>
           </li>
           </Link>
           <Link to="/TSIG1" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>TSIG1 قسم</span>
+            <h2>TSIG1 قسم</h2>
           </li>
           </Link>
           <Link to="/TSIG2" style={{ textDecoration: "none" }}>
           <li>
             <SchoolIcon className="icon" />
-            <span>TSIG2 قسم</span>
+            <h2>TSIG2 قسم</h2>
           </li>
           </Link>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
-          </li>
+        
           <p className="title">الاساتذ</p>
           <Link to="/Teachers" style={{ textDecoration: "none" }}>
 
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>كل الاساتذ</span>
+            <h2>كل الاساتذ</h2>
           </li>
           </Link>
+          <Link to="/TeachersM" style={{ textDecoration: "none" }}>
 
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>خلاص الاساتذ</span>
+            <h2>الاساتذ بالشهر </h2>
           </li>
+          </Link>
+
        
           <p className="title">USER</p>
          

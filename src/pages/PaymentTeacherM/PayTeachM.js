@@ -1,4 +1,4 @@
-import "./PayTeach.scss";
+import "./PayTeachM.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -15,12 +15,12 @@ const New = ({ inputs, title }) => {
   const [Month, setMonth] = useState("");
   const [userpay, setuserpay] = useState([])
   const addpay = () => {
-    axios.post("http://localhost:3001/api/items/PaymentTeacher", {
+    axios.post("http://localhost:3001/api/items/PaymentTeacherM", {
       student: student.first_name,
       dbt: Age,
-      price: student.Payment*price,
+      price: price,
       // image_user:file.name
-      id_Teacher: student.id_Teacher,
+      id_TeacherM: student.id_TeacherM,
       month: Month
 
     }).then((response) => {
@@ -45,16 +45,16 @@ const New = ({ inputs, title }) => {
       setstudent(s)
     }
   }
-  useEffect((id_Teacher) => {
+  useEffect((id_TeacherM) => {
 
-    axios.get(`http://localhost:3001/api/items/selectteacherpay/${student.id_Teacher}`).then((response) => {
+    axios.get(`http://localhost:3001/api/items/selectteacherMpay/${student.id_TeacherM}`).then((response) => {
     //   console.log(response.data);
       setuserpay(response.data)
     })
 
     get()
     datetoday()
-  }, [`http://localhost:3001/api/items/selectteacherpay/${student.id_Teacher}`])
+  }, [`http://localhost:3001/api/items/selectteacherMpay/${student.id_TeacherM}`])
 
 //   console.log(Month)
 // console.log(student)
@@ -96,12 +96,13 @@ const New = ({ inputs, title }) => {
               </select>
               <p>Date</p>
               <input type="date" name="price" onChange={(e) => setAge(e.target.value)}></input>
-              <p>ساعات العمل</p>
+
+              <p>Price</p>
               <input type="number" name="price" onChange={(e) => setPrice(e.target.value)}></input>
               
 
             </div>
-            <a href="http://localhost:3000/PaymentTeacher"><button onClick={addpay}>Send</button></a>
+            <a href="http://localhost:3000/PaymentTeacherM"><button onClick={addpay}>Send</button></a>
 
 
           </div>
